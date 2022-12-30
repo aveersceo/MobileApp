@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
 import 'dart:convert';
 import 'package:jdenticon_dart/jdenticon_dart.dart';
+import 'package:openai_gpt3_api/openai_gpt3_api.dart';
 
 class help_page extends StatefulWidget {
   const help_page({super.key});

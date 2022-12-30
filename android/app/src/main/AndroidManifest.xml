@@ -2,7 +2,7 @@
     package="com.example.aveers_student_poc">
    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="aveers_student_poc"
+        android:label="Aveers Freshchap"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

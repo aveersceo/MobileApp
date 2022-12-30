@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'dart:ui';
+import 'package:aveers_student_poc/components/notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/home_page.dart';
 import 'pages/news_page.dart';
 import 'pages/help_page.dart';
-import 'pages/shop_page.dart';
-import 'pages/grow_page.dart';
+import 'pages/learn_page.dart';
 import 'components/profile_popup.dart';
 import 'components/login.dart';
 import 'components/navicon_change.dart';
@@ -77,11 +78,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
       case 1:
         return news_page();
       case 2:
-        return help_page();
+        return learn_page();
       case 3:
-        return shop_page();
-      case 4:
-        return grow_page();
+        return help_page();
       default:
         return Scaffold(backgroundColor: Colors.white);
     }
@@ -102,7 +101,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 children: [
                   IconButton(
                     icon: Icon(
-                      Icons.account_circle_outlined,
+                      PhosphorIcons.userCircleBold,
                     ),
                     tooltip: "Sign In",
                     onPressed: () {
@@ -129,10 +128,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   IconButton(
                     splashRadius: 10.0,
                     icon: Icon(
-                      Icons.message_outlined,
+                      PhosphorIcons.bellSimpleBold,
                     ),
-                    tooltip: "Messages",
-                    onPressed: () {},
+                    tooltip: "Notifications",
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => notification_page()),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -144,29 +149,24 @@ class _BottomNavBarState extends State<BottomNavBar> {
           height: 50.0,
           items: <Widget>[
             Icon(
-              Icons.home,
+              PhosphorIcons.houseSimpleBold,
               size: 25,
               color: globals.colorcont1,
             ),
             Icon(
-              Icons.newspaper,
+              PhosphorIcons.newspaperBold,
               size: 25,
               color: globals.colorcont2,
             ),
             Icon(
-              Icons.help,
+              PhosphorIcons.bookOpenBold,
               size: 25,
               color: globals.colorcont3,
             ),
             Icon(
-              Icons.shopping_cart,
+              PhosphorIcons.infoBold,
               size: 25,
               color: globals.colorcont4,
-            ),
-            Icon(
-              Icons.business,
-              size: 25,
-              color: globals.colorcont5,
             ),
           ],
           color: Colors.white,
@@ -183,9 +183,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
               } else if (index == 1) {
                 _pageName = 'News';
               } else if (index == 2) {
-                _pageName = 'Help';
+                _pageName = 'Learn';
               } else if (index == 3) {
-                _pageName = 'Shop';
+                _pageName = 'Help';
               } else if (index == 4) {
                 _pageName = 'Grow';
               }

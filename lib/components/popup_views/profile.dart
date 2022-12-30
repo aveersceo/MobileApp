@@ -8,6 +8,8 @@ import 'package:aveers_student_poc/components/login.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:aveers_student_poc/variables/globals.dart' as globals;
 import 'package:jdenticon_dart/jdenticon_dart.dart';
+import 'package:marquee/marquee.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:random_avatar/random_avatar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -171,16 +173,15 @@ class _profileState extends State<profile> {
                                                       ),
                                                     ),
                                                     Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Text(
-                                                        course,
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Poppins Regular'),
-                                                      ),
-                                                    ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Text(
+                                                          course,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Poppins Bold'),
+                                                        )),
                                                   ],
                                                 ),
                                               ),
@@ -283,16 +284,15 @@ class _profileState extends State<profile> {
                                                       ),
                                                     ),
                                                     Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Text(
-                                                        college,
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Poppins Regular'),
-                                                      ),
-                                                    ),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Text(
+                                                          college,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Poppins Bold'),
+                                                        )),
                                                   ],
                                                 ),
                                               ),
@@ -381,7 +381,10 @@ class _profileState extends State<profile> {
                                           fontFamily: 'Poppins Regular'),
                                     ),
                                     Spacer(),
-                                    Icon(Icons.chevron_right),
+                                    Icon(
+                                      PhosphorIcons.caretCircleRightBold,
+                                      size: 20.0,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -408,7 +411,10 @@ class _profileState extends State<profile> {
                                           fontFamily: 'Poppins Regular'),
                                     ),
                                     Spacer(),
-                                    Icon(Icons.chevron_right),
+                                    Icon(
+                                      PhosphorIcons.caretCircleRightBold,
+                                      size: 20.0,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -435,7 +441,10 @@ class _profileState extends State<profile> {
                                           fontFamily: 'Poppins Regular'),
                                     ),
                                     Spacer(),
-                                    Icon(Icons.chevron_right),
+                                    Icon(
+                                      PhosphorIcons.caretCircleRightBold,
+                                      size: 20.0,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -462,7 +471,10 @@ class _profileState extends State<profile> {
                                           fontFamily: 'Poppins Regular'),
                                     ),
                                     Spacer(),
-                                    Icon(Icons.chevron_right),
+                                    Icon(
+                                      PhosphorIcons.caretCircleRightBold,
+                                      size: 20.0,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -502,7 +514,7 @@ class _profileState extends State<profile> {
                                     ),
                                     Spacer(),
                                     Icon(
-                                      Icons.logout_outlined,
+                                      PhosphorIcons.signOutBold,
                                       color: Colors.red,
                                       size: 20.0,
                                     ),

@@ -4,6 +4,7 @@ import 'package:aveers_student_poc/components/login.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jdenticon_dart/jdenticon_dart.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:random_avatar/random_avatar.dart';
 import 'package:aveers_student_poc/components/popup_views/profile.dart';
 import 'package:pocketbase/pocketbase.dart';
@@ -82,7 +83,7 @@ class _profile_popupState extends State<profile_popup> {
                   child: Row(
                     children: [
                       Icon(
-                        Icons.perm_identity_outlined,
+                        PhosphorIcons.userBold,
                         color: Colors.black,
                         size: 20.0,
                       ),
@@ -107,7 +108,7 @@ class _profile_popupState extends State<profile_popup> {
                   child: Row(
                     children: [
                       Icon(
-                        Icons.settings_outlined,
+                        PhosphorIcons.gearSixBold,
                         color: Colors.black,
                         size: 20.0,
                       ),
@@ -141,7 +142,7 @@ class _profile_popupState extends State<profile_popup> {
                   child: Row(
                     children: [
                       Icon(
-                        Icons.logout_outlined,
+                        PhosphorIcons.signOutBold,
                         color: Colors.red,
                         size: 20.0,
                       ),

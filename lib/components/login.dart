@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:aveers_student_poc/main.dart';
 import 'package:aveers_student_poc/variables/globals.dart' as globals;
 import 'package:appwrite/appwrite.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:show_up_animation/show_up_animation.dart';
@@ -140,7 +141,7 @@ class _loginState extends State<login> {
                                               border: InputBorder.none,
                                               hintText: 'Email',
                                               prefixIcon:
-                                                  Icon(Icons.email_outlined),
+                                                  Icon(PhosphorIcons.atBold),
                                               prefixIconColor: Colors.black,
                                               hintStyle: TextStyle(
                                                   fontFamily:
@@ -174,16 +175,16 @@ class _loginState extends State<login> {
                                   decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: 'Password',
-                                      prefixIcon: Icon(Icons.password_outlined),
+                                      prefixIcon:
+                                          Icon(PhosphorIcons.passwordBold),
                                       hintStyle: TextStyle(
                                           fontFamily: 'Poppins Regular'),
                                       suffixIcon: IconButton(
                                         splashColor: Colors.transparent,
                                         hoverColor: Colors.transparent,
                                         icon: _obscureText
-                                            ? Icon(
-                                                Icons.visibility_off_outlined)
-                                            : Icon(Icons.visibility_outlined),
+                                            ? Icon(PhosphorIcons.eyeClosedBold)
+                                            : Icon(PhosphorIcons.eyeBold),
                                         onPressed: () {
                                           _obscureText = !_obscureText;
                                           setState(() {});
@@ -383,7 +384,7 @@ class _registerState extends State<register> {
                                           decoration: InputDecoration(
                                               border: InputBorder.none,
                                               prefixIcon:
-                                                  Icon(Icons.email_outlined),
+                                                  Icon(PhosphorIcons.atBold),
                                               hintText: 'Email',
                                               hintStyle: TextStyle(
                                                   fontFamily:
@@ -416,7 +417,8 @@ class _registerState extends State<register> {
                                   decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: 'Name',
-                                      prefixIcon: Icon(Icons.person_outline),
+                                      prefixIcon:
+                                          Icon(PhosphorIcons.userCircleBold),
                                       hintStyle: TextStyle(
                                           fontFamily: 'Poppins Regular')),
                                 ),
@@ -444,16 +446,16 @@ class _registerState extends State<register> {
                                   decoration: InputDecoration(
                                       border: InputBorder.none,
                                       hintText: 'Password',
-                                      prefixIcon: Icon(Icons.password_outlined),
+                                      prefixIcon:
+                                          Icon(PhosphorIcons.passwordBold),
                                       hintStyle: TextStyle(
                                           fontFamily: 'Poppins Regular'),
                                       suffixIcon: IconButton(
                                         splashColor: Colors.transparent,
                                         hoverColor: Colors.transparent,
                                         icon: _obscureText
-                                            ? Icon(
-                                                Icons.visibility_off_outlined)
-                                            : Icon(Icons.visibility_outlined),
+                                            ? Icon(PhosphorIcons.eyeClosedBold)
+                                            : Icon(PhosphorIcons.eyeBold),
                                         onPressed: () {
                                           _obscureText = !_obscureText;
                                           setState(() {});
