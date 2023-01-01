@@ -14,15 +14,20 @@ import 'components/login.dart';
 import 'components/navicon_change.dart';
 import 'variables/globals.dart' as globals;
 import 'package:pocketbase/pocketbase.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-void main() => runApp(MaterialApp(
-      home: BottomNavBar(),
-      theme: ThemeData().copyWith(
-        colorScheme: ThemeData().colorScheme.copyWith(
-              primary: Colors.black,
-            ),
-      ),
-    ));
+void main() async {
+  await Future.delayed(const Duration(seconds: 3))
+      .then((value) => FlutterNativeSplash.remove());
+  runApp(MaterialApp(
+    home: BottomNavBar(),
+    theme: ThemeData().copyWith(
+      colorScheme: ThemeData().colorScheme.copyWith(
+            primary: Colors.black,
+          ),
+    ),
+  ));
+}
 
 class BottomNavBar extends StatefulWidget {
   @override
