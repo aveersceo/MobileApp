@@ -51,13 +51,14 @@ class _password_changeState extends State<password_change> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFF2F6F7),
-      body: SafeArea(
+    return Container(
+      color: Color(0xFFF2F6F7),
+      child: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               'Update Password',

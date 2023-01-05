@@ -9,6 +9,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:aveers_student_poc/variables/globals.dart' as globals;
 import 'package:jdenticon_dart/jdenticon_dart.dart';
 import 'package:marquee/marquee.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:random_avatar/random_avatar.dart';
@@ -395,11 +396,10 @@ class _profileState extends State<profile> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10.0))),
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => username_change()),
-                                );
+                                showBarModalBottomSheet(
+                                    expand: false,
+                                    context: context,
+                                    builder: (context) => username_change());
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
@@ -425,11 +425,10 @@ class _profileState extends State<profile> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10.0))),
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => email_change()),
-                                );
+                                showBarModalBottomSheet(
+                                    expand: false,
+                                    context: context,
+                                    builder: (context) => email_change());
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
@@ -455,11 +454,10 @@ class _profileState extends State<profile> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10.0))),
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => password_change()),
-                                );
+                                showBarModalBottomSheet(
+                                    expand: false,
+                                    context: context,
+                                    builder: (context) => password_change());
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
