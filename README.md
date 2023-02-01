@@ -46,6 +46,9 @@ The `aveers_student_poc` project uses the following dependencies:
 - [Pocketbase](https://pub.dev/packages/pocketbase)
 - [Curved Navigation Bar](https://pub.dev/packages/curved_navigation_bar)
 - [Show Up Animation](https://pub.dev/packages/show_up_animation)
+- [Phospher Icons](https://pub.dev/packages/flutter_phosphor_icons)
+- [Modal Bottom Sheet](https://pub.dev/packages/modal_bottom_sheet)
+
 
 ## Contributing
 
