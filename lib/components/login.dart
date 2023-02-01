@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:aveers_student_poc/main.dart';
 import 'package:aveers_student_poc/variables/globals.dart' as globals;
 import 'package:appwrite/appwrite.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:shared_preferences/shared_preferences.dart';

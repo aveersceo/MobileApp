@@ -66,24 +66,7 @@ class _news_pageState extends State<news_page> {
                                     height: 200.0,
                                     child: InkWell(
                                       onTap: () {
-                                        /*Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => newsDetails(
-                                                    imgURL: snapshot.data[index]
-                                                        ['urlToImage'],
-                                                    title: snapshot.data[index]
-                                                        ['title'],
-                                                    desc: snapshot.data[index]
-                                                        ['description'],
-                                                    name: snapshot.data[index]
-                                                        ['source']['name'],
-                                                    author: snapshot.data[index]
-                                                        ['author'],
-                                                    artcUrl: snapshot
-                                                        .data[index]['url'],
-                                                  )),
-                                        );*/
+                                        
                                         showBarModalBottomSheet(
                                           expand: false,
                                           context: context,
