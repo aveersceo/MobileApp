@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:android_intent_plus/android_intent.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as rootBundle;
 import 'package:http/http.dart' as http;
@@ -66,7 +67,6 @@ class _news_pageState extends State<news_page> {
                                     height: 200.0,
                                     child: InkWell(
                                       onTap: () {
-                                        
                                         showBarModalBottomSheet(
                                           expand: false,
                                           context: context,
@@ -241,7 +241,7 @@ class newsDetails extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: FloatingActionButton.extended(
-                      backgroundColor: Color(0xFF1E3F82),
+                      backgroundColor: CupertinoColors.activeBlue,
                       elevation: 0.5,
                       onPressed: _launchURL,
                       label: Text(

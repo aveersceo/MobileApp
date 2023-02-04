@@ -90,442 +90,495 @@ class _profileState extends State<profile> {
               curve: Curves.ease,
               direction: Direction.vertical,
               offset: 0.5,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.5),
-                    child: SizedBox(
-                      width: double.infinity,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                        icon: Icon(PhosphorIcons.xCircleBold),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.5),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Card(
+                          elevation: 0.5,
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                CircleAvatar(
+                                  radius: 35.0,
+                                  child: CircleAvatar(
+                                    radius: 34.0,
+                                    child: SvgPicture.string(
+                                      rawSvg,
+                                      width: 55.0,
+                                      height: 55.0,
+                                    ),
+                                    backgroundColor: Colors.white,
+                                  ),
+                                  backgroundColor: Color(0xFF1E3F82),
+                                ),
+                                Text(
+                                  username,
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins Bold', fontSize: 20),
+                                ),
+                                Text(
+                                  email,
+                                  style:
+                                      TextStyle(fontFamily: 'Poppins Regular'),
+                                ),
+                                SizedBox(
+                                  width: 360.0,
+                                  height: 77.0,
+                                  child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      physics: BouncingScrollPhysics(),
+                                      children: [
+                                        Align(
+                                          alignment: Alignment.center,
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SizedBox(
+                                                width: 250.0,
+                                                child: Card(
+                                                  color: Color(0xFFF2F6F7),
+                                                  elevation: 0,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0))),
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(5.0),
+                                                        child: Text(
+                                                          'Course',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Poppins Bold'),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 1.0,
+                                                        width: 250.0,
+                                                        child: Container(
+                                                          color: Colors.black12,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Text(
+                                                            course,
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    'Poppins Bold'),
+                                                          )),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              ConstrainedBox(
+                                                constraints: BoxConstraints(
+                                                    minWidth: 100),
+                                                child: Card(
+                                                  elevation: 0,
+                                                  color: Color(0xFFF2F6F7),
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0))),
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(5.0),
+                                                        child: Text(
+                                                          'Year',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Poppins Bold'),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 1.0,
+                                                        width: 100.0,
+                                                        child: Container(
+                                                          color: Colors.black12,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Text(
+                                                          year,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Poppins Regular'),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ]),
+                                ),
+                                SizedBox(
+                                  width: 360.0,
+                                  height: 77.0,
+                                  child: ListView(
+                                      physics: BouncingScrollPhysics(),
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      children: [
+                                        Align(
+                                          alignment: Alignment.center,
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SizedBox(
+                                                width: 250.0,
+                                                child: Card(
+                                                  color: Color(0xFFF2F6F7),
+                                                  elevation: 0,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0))),
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(5.0),
+                                                        child: Text(
+                                                          'College',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Poppins Bold'),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 1.0,
+                                                        width: 250.0,
+                                                        child: Container(
+                                                          color: Colors.black12,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Text(
+                                                            college,
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    'Poppins Bold'),
+                                                          )),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              ConstrainedBox(
+                                                constraints: BoxConstraints(
+                                                    minWidth: 100),
+                                                child: Card(
+                                                  elevation: 0,
+                                                  color: Color(0xFFF2F6F7),
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0))),
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(5.0),
+                                                        child: Text(
+                                                          'Batch',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Poppins Bold'),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 1.0,
+                                                        width: 100.0,
+                                                        child: Container(
+                                                          color: Colors.black12,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Text(
+                                                          batch,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Poppins Regular'),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ]),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 5.0),
                       child: Card(
                         elevation: 0.5,
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10.0))),
                         child: Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              CircleAvatar(
-                                radius: 35.0,
-                                child: CircleAvatar(
-                                  radius: 34.0,
-                                  child: SvgPicture.string(
-                                    rawSvg,
-                                    width: 55.0,
-                                    height: 55.0,
+                              InkWell(
+                                customBorder: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0))),
+                                onTap: () {},
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Update Education Details',
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins Regular'),
+                                      ),
+                                      Spacer(),
+                                      Icon(
+                                        PhosphorIcons.caretCircleRightBold,
+                                        size: 20.0,
+                                      ),
+                                    ],
                                   ),
-                                  backgroundColor: Colors.white,
                                 ),
-                                backgroundColor: Color(0xFF1E3F82),
                               ),
-                              Text(
-                                username,
-                                style: TextStyle(
-                                    fontFamily: 'Poppins Bold', fontSize: 20),
-                              ),
-                              Text(
-                                email,
-                                style: TextStyle(fontFamily: 'Poppins Regular'),
-                              ),
-                              SizedBox(
-                                width: 360.0,
-                                height: 77.0,
-                                child: ListView(
-                                    scrollDirection: Axis.horizontal,
-                                    physics: BouncingScrollPhysics(),
+                              Divider(),
+                              InkWell(
+                                customBorder: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0))),
+                                onTap: () {
+                                  showBarModalBottomSheet(
+                                      expand: false,
+                                      context: context,
+                                      builder: (context) => username_change());
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Row(
                                     children: [
-                                      Align(
-                                        alignment: Alignment.center,
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            SizedBox(
-                                              width: 250.0,
-                                              child: Card(
-                                                color: Color(0xFFF2F6F7),
-                                                elevation: 0,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0))),
-                                                child: Column(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              5.0),
-                                                      child: Text(
-                                                        'Course',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Poppins Bold'),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 1.0,
-                                                      width: 250.0,
-                                                      child: Container(
-                                                        color: Colors.black12,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Text(
-                                                          course,
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Poppins Bold'),
-                                                        )),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            ConstrainedBox(
-                                              constraints:
-                                                  BoxConstraints(minWidth: 100),
-                                              child: Card(
-                                                elevation: 0,
-                                                color: Color(0xFFF2F6F7),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0))),
-                                                child: Column(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              5.0),
-                                                      child: Text(
-                                                        'Year',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Poppins Bold'),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 1.0,
-                                                      width: 100.0,
-                                                      child: Container(
-                                                        color: Colors.black12,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Text(
-                                                        year,
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Poppins Regular'),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                      Text(
+                                        'Change Username',
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins Regular'),
                                       ),
-                                    ]),
+                                      Spacer(),
+                                      Icon(
+                                        PhosphorIcons.caretCircleRightBold,
+                                        size: 20.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                              SizedBox(
-                                width: 360.0,
-                                height: 77.0,
-                                child: ListView(
-                                    physics: BouncingScrollPhysics(),
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
+                              Divider(),
+                              InkWell(
+                                customBorder: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0))),
+                                onTap: () {
+                                  showBarModalBottomSheet(
+                                      expand: false,
+                                      context: context,
+                                      builder: (context) => email_change());
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Row(
                                     children: [
-                                      Align(
-                                        alignment: Alignment.center,
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            SizedBox(
-                                              width: 250.0,
-                                              child: Card(
-                                                color: Color(0xFFF2F6F7),
-                                                elevation: 0,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0))),
-                                                child: Column(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              5.0),
-                                                      child: Text(
-                                                        'College',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Poppins Bold'),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 1.0,
-                                                      width: 250.0,
-                                                      child: Container(
-                                                        color: Colors.black12,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Text(
-                                                          college,
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Poppins Bold'),
-                                                        )),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            ConstrainedBox(
-                                              constraints:
-                                                  BoxConstraints(minWidth: 100),
-                                              child: Card(
-                                                elevation: 0,
-                                                color: Color(0xFFF2F6F7),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0))),
-                                                child: Column(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              5.0),
-                                                      child: Text(
-                                                        'Batch',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Poppins Bold'),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 1.0,
-                                                      width: 100.0,
-                                                      child: Container(
-                                                        color: Colors.black12,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Text(
-                                                        batch,
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Poppins Regular'),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                      Text(
+                                        'Change Email',
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins Regular'),
                                       ),
-                                    ]),
+                                      Spacer(),
+                                      Icon(
+                                        PhosphorIcons.caretCircleRightBold,
+                                        size: 20.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Divider(),
+                              InkWell(
+                                customBorder: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0))),
+                                onTap: () {
+                                  showBarModalBottomSheet(
+                                      expand: false,
+                                      context: context,
+                                      builder: (context) => password_change());
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Change Password',
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins Regular'),
+                                      ),
+                                      Spacer(),
+                                      Icon(
+                                        PhosphorIcons.caretCircleRightBold,
+                                        size: 20.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ],
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 5.0),
-                    child: Card(
-                      elevation: 0.5,
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0))),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            InkWell(
-                              customBorder: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0))),
-                              onTap: () {},
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Update Education Details',
-                                      style: TextStyle(
-                                          fontFamily: 'Poppins Regular'),
-                                    ),
-                                    Spacer(),
-                                    Icon(
-                                      PhosphorIcons.caretCircleRightBold,
-                                      size: 20.0,
-                                    ),
-                                  ],
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 5.0),
+                      child: Card(
+                        elevation: 0.5,
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                            children: [
+                              InkWell(
+                                customBorder: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0))),
+                                onTap: () {
+                                  _logout();
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Logout',
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins Regular',
+                                            color: Colors.red),
+                                      ),
+                                      Spacer(),
+                                      Icon(
+                                        PhosphorIcons.signOutBold,
+                                        color: Colors.red,
+                                        size: 20.0,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            Divider(),
-                            InkWell(
-                              customBorder: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0))),
-                              onTap: () {
-                                showBarModalBottomSheet(
-                                    expand: false,
-                                    context: context,
-                                    builder: (context) => username_change());
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Change Username',
-                                      style: TextStyle(
-                                          fontFamily: 'Poppins Regular'),
-                                    ),
-                                    Spacer(),
-                                    Icon(
-                                      PhosphorIcons.caretCircleRightBold,
-                                      size: 20.0,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Divider(),
-                            InkWell(
-                              customBorder: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0))),
-                              onTap: () {
-                                showBarModalBottomSheet(
-                                    expand: false,
-                                    context: context,
-                                    builder: (context) => email_change());
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Change Email',
-                                      style: TextStyle(
-                                          fontFamily: 'Poppins Regular'),
-                                    ),
-                                    Spacer(),
-                                    Icon(
-                                      PhosphorIcons.caretCircleRightBold,
-                                      size: 20.0,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Divider(),
-                            InkWell(
-                              customBorder: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0))),
-                              onTap: () {
-                                showBarModalBottomSheet(
-                                    expand: false,
-                                    context: context,
-                                    builder: (context) => password_change());
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Change Password',
-                                      style: TextStyle(
-                                          fontFamily: 'Poppins Regular'),
-                                    ),
-                                    Spacer(),
-                                    Icon(
-                                      PhosphorIcons.caretCircleRightBold,
-                                      size: 20.0,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 5.0),
-                    child: Card(
-                      elevation: 0.5,
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0))),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Column(
-                          children: [
-                            InkWell(
-                              customBorder: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0))),
-                              onTap: () {
-                                _logout();
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Logout',
-                                      style: TextStyle(
-                                          fontFamily: 'Poppins Regular',
-                                          color: Colors.red),
-                                    ),
-                                    Spacer(),
-                                    Icon(
-                                      PhosphorIcons.signOutBold,
-                                      color: Colors.red,
-                                      size: 20.0,
-                                    ),
-                                  ],
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 5.0),
+                      child: Card(
+                        elevation: 0.5,
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                            children: [
+                              InkWell(
+                                customBorder: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0))),
+                                onTap: () {},
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Delete Account',
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins Regular',
+                                            color: Colors.red),
+                                      ),
+                                      Spacer(),
+                                      Icon(
+                                        PhosphorIcons.userCircleMinusBold,
+                                        color: Colors.red,
+                                        size: 20.0,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             );
           } else if (snapshot.hasError) {

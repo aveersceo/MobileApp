@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 import 'package:aveers_student_poc/components/notifications.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -175,7 +176,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ),
           ],
           color: Colors.white,
-          buttonBackgroundColor: Color(0xFF1E3F82),
+          buttonBackgroundColor: CupertinoColors.activeBlue,
           backgroundColor: Colors.transparent,
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(milliseconds: 200),

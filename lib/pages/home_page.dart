@@ -24,6 +24,7 @@ class _home_pageState extends State<home_page> {
   final pb = PocketBase('http://43.204.171.125');
   dynamic response;
   dynamic response2;
+  dynamic response3;
   var items = [
     'Select College',
     'SUNBEAM COLLEGE FOR WOMAN',
@@ -69,6 +70,23 @@ class _home_pageState extends State<home_page> {
     return jsonb;
   }
 
+  Future<List<dynamic>> fetchCourses() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String email = prefs.getString('email').toString();
+    String password = prefs.getString('pass').toString();
+    final authData = await pb.collection('users').authWithPassword(
+          email,
+          password,
+        );
+    final resultList = await pb.collection('colleges').getList(
+          page: 1,
+          perPage: 50,
+        );
+    var jsonb = jsonDecode(resultList.toString())['items'];
+
+    return jsonb;
+  }
+
   Future<List<dynamic>> fetchtimetable() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String email = prefs.getString('email').toString();
@@ -90,6 +108,7 @@ class _home_pageState extends State<home_page> {
     super.initState();
     response = fetchUsers();
     response2 = fetchtimetable();
+    response3 = fetchCourses();
   }
 
   @override
@@ -124,7 +143,7 @@ class _home_pageState extends State<home_page> {
                                         fontSize: 20.0),
                                   ),
                                   Spacer(),
-                                  IconButton(
+                                  /* IconButton(
                                       splashColor: Colors.transparent,
                                       hoverColor: Colors.transparent,
                                       tooltip: 'Edit',
@@ -139,6 +158,7 @@ class _home_pageState extends State<home_page> {
                                         PhosphorIcons.pencilBold,
                                         size: 25.0,
                                       ))
+                                      */
                                 ],
                               ),
                               Container(
@@ -232,7 +252,7 @@ class _home_pageState extends State<home_page> {
                                         fontSize: 20.0),
                                   ),
                                   Spacer(),
-                                  IconButton(
+                                  /* IconButton(
                                       onPressed: () {
                                         Navigator.push(
                                           context,
@@ -242,6 +262,7 @@ class _home_pageState extends State<home_page> {
                                         );
                                       },
                                       icon: Icon(PhosphorIcons.calendarBold))
+                                      */
                                 ],
                               ),
                               SizedBox(
@@ -299,101 +320,137 @@ class _home_pageState extends State<home_page> {
                               ),
                               SizedBox(
                                 width: double.infinity,
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0))),
-                                  elevation: 0.5,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        DropdownButton(
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins Regular',
-                                              color: Colors.black),
-                                          items: items.map((String items) {
-                                            return DropdownMenuItem(
-                                              child: Text(items),
-                                              value: items,
-                                            );
-                                          }).toList(),
-                                          onChanged: (String? newvalue) {
-                                            setState(() {
-                                              defvalue = newvalue!;
-                                            });
-                                          },
-                                          value: defvalue,
-                                        ),
-                                        DropdownButton(
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins Regular',
-                                              color: Colors.black),
-                                          items: courses.map((String items) {
-                                            return DropdownMenuItem(
-                                              child: Text(items),
-                                              value: items,
-                                            );
-                                          }).toList(),
-                                          onChanged: (String? newvalue) {
-                                            setState(() {
-                                              crdefvalue = newvalue!;
-                                            });
-                                          },
-                                          value: crdefvalue,
-                                        ),
-                                        DropdownButton(
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins Regular',
-                                              color: Colors.black),
-                                          items: years.map((String items) {
-                                            return DropdownMenuItem(
-                                              child: Text(items),
-                                              value: items,
-                                            );
-                                          }).toList(),
-                                          onChanged: (String? newvalue) {
-                                            setState(() {
-                                              yrdefvalue = newvalue!;
-                                            });
-                                          },
-                                          value: yrdefvalue,
-                                        ),
-                                        ListTile(
-                                          title: Text(
-                                            'SOFTWARE PROJECT MANAGMENT',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins Regular',
-                                                fontSize: 15.0),
-                                          ),
-                                        ),
-                                        ListTile(
-                                          title: Text(
-                                            'PRICIPLES OF MANAGEMNT',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins Regular',
-                                                fontSize: 15.0),
-                                          ),
-                                        ),
-                                        ListTile(
-                                          title: Text(
-                                            'INTERNET OF THINGS ',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins Regular',
-                                                fontSize: 15.0),
-                                          ),
-                                        ),
-                                        ListTile(
-                                          title: Text(
-                                            '4.0 INTERNET OF THINGS ',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins Regular',
-                                                fontSize: 15.0),
-                                          ),
-                                        )
-                                      ],
+                                child: Column(
+                                  children: [
+                                    FutureBuilder(
+                                      future: response3,
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot snapshot) {
+                                        if (snapshot.hasData) {
+                                          return ShowUpAnimation(
+                                            delayStart:
+                                                Duration(milliseconds: 50),
+                                            animationDuration:
+                                                Duration(seconds: 1),
+                                            curve: Curves.ease,
+                                            direction: Direction.vertical,
+                                            offset: 0.5,
+                                            child: RefreshIndicator(
+                                              onRefresh: () {
+                                                return Future(() {
+                                                  setState(() {
+                                                    response = fetchUsers();
+                                                  });
+                                                });
+                                              },
+                                              child: ListView.builder(
+                                                physics:
+                                                    BouncingScrollPhysics(),
+                                                shrinkWrap: true,
+                                                itemCount: snapshot.data.length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return Padding(
+                                                    padding: const EdgeInsets
+                                                            .fromLTRB(
+                                                        5.0, 0.0, 5.0, 0),
+                                                    child: Card(
+                                                      clipBehavior:
+                                                          Clip.antiAlias,
+                                                      shape: RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius.circular(
+                                                                      10.0))),
+                                                      elevation: 0.5,
+                                                      child: Column(
+                                                        children: [
+                                                          ExpansionTile(
+                                                            title: Text(
+                                                              snapshot.data[
+                                                                      index]
+                                                                  ['name'],
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Poppins Bold'),
+                                                              maxLines: 2,
+                                                            ),
+                                                            children: [
+                                                              Container(
+                                                                color: Colors
+                                                                    .black12,
+                                                                width: double
+                                                                    .infinity,
+                                                                child: Padding(
+                                                                    padding: const EdgeInsets
+                                                                            .all(
+                                                                        10.0),
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        Text(
+                                                                          'UG Courses',
+                                                                          style:
+                                                                              TextStyle(fontFamily: 'Poppins Bold'),
+                                                                        ),
+                                                                        Align(
+                                                                          alignment:
+                                                                              Alignment.centerLeft,
+                                                                          child:
+                                                                              Text(
+                                                                            snapshot.data[index]['ug'],
+                                                                            style:
+                                                                                TextStyle(fontFamily: 'Poppins Regular'),
+                                                                          ),
+                                                                        ),
+                                                                        Text(
+                                                                          'PG Courses',
+                                                                          style:
+                                                                              TextStyle(fontFamily: 'Poppins Bold'),
+                                                                        ),
+                                                                        Align(
+                                                                          alignment:
+                                                                              Alignment.centerLeft,
+                                                                          child:
+                                                                              Text(
+                                                                            snapshot.data[index]['pg'],
+                                                                            style:
+                                                                                TextStyle(fontFamily: 'Poppins Regular'),
+                                                                          ),
+                                                                        ),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              10.0,
+                                                                        ),
+                                                                      ],
+                                                                    )),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          );
+                                        } else {
+                                          return Center(
+                                            child: SizedBox(
+                                              height: 25.0,
+                                              width: 25.0,
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 2.0,
+                                                color: Color(0xFF1E3F82),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ),
                               SizedBox(height: 55.0)

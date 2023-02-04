@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:aveers_student_poc/main.dart';
 import 'package:aveers_student_poc/variables/globals.dart' as globals;
@@ -206,7 +207,7 @@ class _loginState extends State<login> {
                               width: 600,
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: Color(0xFF1E3F82),
+                                      primary: CupertinoColors.activeBlue,
                                       elevation: 0.0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
@@ -242,7 +243,7 @@ class _loginState extends State<login> {
                           ' Register Now',
                           style: TextStyle(
                               fontFamily: 'Poppins Bold',
-                              color: Color(0xFF1E3F82)),
+                              color: CupertinoColors.activeBlue),
                         ),
                         onTap: () {
                           Navigator.push(
@@ -477,7 +478,7 @@ class _registerState extends State<register> {
                               width: 600,
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: Color(0xFF1E3F82),
+                                      primary: CupertinoColors.activeBlue,
                                       elevation: 0.0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
