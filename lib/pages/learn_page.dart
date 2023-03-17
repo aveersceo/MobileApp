@@ -1,5 +1,6 @@
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:appwrite/models.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:random_avatar/random_avatar.dart';
@@ -30,7 +31,7 @@ class _learn_pageState extends State<learn_page> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String email = prefs.getString('email').toString();
     String password = prefs.getString('pass').toString();
-    final authData = await pb.collection('users').authWithPassword(
+    /*final authData = await pb.collection('users').authWithPassword(
           email,
           password,
         );
@@ -42,6 +43,7 @@ class _learn_pageState extends State<learn_page> {
     final records = await pb.collection('users').getFullList(
           batch: 2,
         );
+        */
     //print(records);
     final resultList = await pb.collection('learn_basics101').getList(
           page: 1,
@@ -141,7 +143,8 @@ class _learn_pageState extends State<learn_page> {
                                 String url =
                                     'https://www.youtube.com/watch?v=' + vid;
                                 _launchURL() async {
-                                  /*final uri = Uri.parse(url);
+                                  /*
+                                  final uri = Uri.parse(url);
                                   if (await canLaunchUrl(uri)) {
                                     await launchUrl(uri);
                                   } else {
@@ -260,7 +263,7 @@ class _learn_pageState extends State<learn_page> {
                             width: 25.0,
                             child: CircularProgressIndicator(
                               strokeWidth: 2.0,
-                              color: Color(0xFF1E3F82),
+                              color: CupertinoColors.activeBlue,
                             ),
                           ),
                         );

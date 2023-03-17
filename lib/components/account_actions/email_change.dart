@@ -1,8 +1,12 @@
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:aveers_student_poc/components/login.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:aveers_student_poc/variables/globals.dart' as globals;
+import 'package:pocketbase/pocketbase.dart';
 import 'package:random_avatar/random_avatar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class email_change extends StatefulWidget {
   const email_change({super.key});
@@ -14,37 +18,53 @@ class email_change extends StatefulWidget {
 class _email_changeState extends State<email_change> {
   TextEditingController _newemail = TextEditingController();
   TextEditingController _password = TextEditingController();
-  late final Client _client;
-  late final Account _account;
-  late final Databases _database;
-  late final Storage _storage;
-
-  void initState() {
-    super.initState();
-    _client = Client()
-      ..setEndpoint('http://43.204.171.125:80/v1')
-      ..setProject('6369298a96cc32391631');
-    _account = Account(_client);
-  }
 
   Future<void> _emailchange1() async {
     try {
-      await _account.updateEmail(
-          email: _newemail.text, password: _password.text);
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text(
-        'Email updated!',
-        style: TextStyle(fontFamily: 'Poppins Regular'),
-      )));
+      final pb = PocketBase('http://43.204.171.125');
+
+      String emailnew = _newemail.text;
+      String passwordex = _password.text;
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String email = prefs.getString('email').toString();
+      String password = prefs.getString('pass').toString();
+      final authData = await pb.collection('users').authWithPassword(
+            email,
+            password,
+          );
+
+      final body = <String, dynamic>{
+        "email": emailnew,
+        "emailVisibility": true,
+      };
+      if (passwordex == password) {
+        final record = await pb
+            .collection('users')
+            .update(pb.authStore.model.id, body: body);
+      }
+
+      WidgetsBinding.instance.addPostFrameCallback((_) => CherryToast.success(
+            animationType: AnimationType.fromTop,
+            title: Text(
+              'Email updated!',
+              style: TextStyle(fontFamily: 'Poppins Regular'),
+            ),
+            toastPosition: Position.top,
+            actionHandler: () {},
+          ).show(context));
       Navigator.pop(context);
       Navigator.pop(context);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text(
-            'Error, Please try again later!',
-            style: TextStyle(fontFamily: 'Poppins Regular'),
-          )));
+      WidgetsBinding.instance.addPostFrameCallback((_) => CherryToast.success(
+            animationType: AnimationType.fromTop,
+            title: Text(
+              'Error!, Please Try again later.',
+              style: TextStyle(fontFamily: 'Poppins Regular'),
+            ),
+            toastPosition: Position.top,
+            actionHandler: () {},
+          ).show(context));
       Navigator.pop(context);
     }
   }

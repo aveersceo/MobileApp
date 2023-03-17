@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 import 'package:aveers_student_poc/components/notifications.dart';
+import 'package:aveers_student_poc/components/popup_views/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -16,10 +17,10 @@ import 'components/navicon_change.dart';
 import 'variables/globals.dart' as globals;
 import 'package:pocketbase/pocketbase.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
 
-void main() async {
-  await Future.delayed(const Duration(seconds: 3))
-      .then((value) => FlutterNativeSplash.remove());
+void main() {
   runApp(MaterialApp(
     home: BottomNavBar(),
     theme: ThemeData().copyWith(
@@ -61,11 +62,22 @@ class _BottomNavBarState extends State<BottomNavBar> {
       globals.username = usrname;
       String userId = jsonb[0]['id'].toString();
       globals.userId = userId;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      /*ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          behavior: SnackBarBehavior.floating,
           content: Text(
-        'Welcome back, ' + usrname,
-        style: TextStyle(fontFamily: 'Poppins Regular'),
-      )));
+            'Welcome back, ' + usrname,
+            style: TextStyle(fontFamily: 'Poppins Regular'),
+          )));
+          */
+      CherryToast.success(
+        animationType: AnimationType.fromTop,
+        title: Text(
+          'Welcome back, ' + usrname,
+          style: TextStyle(fontFamily: 'Poppins Regular'),
+        ),
+        toastPosition: Position.top,
+        actionHandler: () {},
+      ).show(context);
     } catch (e) {
       globals.isLoggedIn = false;
     }
@@ -112,11 +124,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     tooltip: "Sign In",
                     onPressed: () {
                       if (globals.isLoggedIn == true) {
-                        showDialog(
+                        /*showDialog(
                             context: context,
                             builder: (BuildContext context) {
                               return profile_popup();
                             });
+                            */
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => profile()),
+                        );
                       } else {
                         Navigator.push(
                           context,
@@ -132,19 +149,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   ),
                   Spacer(),
                   IconButton(
-                    splashRadius: 10.0,
-                    icon: Icon(
-                      PhosphorIcons.bellSimpleBold,
-                    ),
-                    tooltip: "Notifications",
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => notification_page()),
-                      );
-                    },
-                  ),
+                      splashRadius: 10.0,
+                      icon: Icon(
+                        PhosphorIcons.bellSimpleBold,
+                      ),
+                      tooltip: "Notifications",
+                      onPressed: null),
                 ],
               ),
             ))),

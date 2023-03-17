@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:aveers_student_poc/main.dart';
@@ -43,25 +45,31 @@ class _loginState extends State<login> {
       globals.username = usrname;
       String userId = jsonb[0]['id'].toString();
       globals.userId = userId;
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          backgroundColor: Colors.lightGreen,
-          content: Text(
-            'Logged in succesfully!',
-            style: TextStyle(fontFamily: 'Poppins Regular'),
-          )));
+
+      WidgetsBinding.instance.addPostFrameCallback((_) => CherryToast.success(
+            animationType: AnimationType.fromTop,
+            title: Text(
+              'Logged In successfully!',
+              style: TextStyle(fontFamily: 'Poppins Regular'),
+            ),
+            toastPosition: Position.top,
+            actionHandler: () {},
+          ).show(context));
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('email', email);
       prefs.setString('pass', password);
       globals.isLoggedIn = true;
       Navigator.pop(context);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text(
-            'This Email and Password does not match! Please try again.',
-            style: TextStyle(fontFamily: 'Poppins Regular'),
-          )));
-      print(e);
+      CherryToast.error(
+        animationType: AnimationType.fromTop,
+        title: Text(
+          'This Email and Password does not match! Please try again.',
+          style: TextStyle(fontFamily: 'Poppins Regular'),
+        ),
+        toastPosition: Position.top,
+        actionHandler: () {},
+      ).show(context);
     }
   }
 
@@ -224,36 +232,37 @@ class _loginState extends State<login> {
                                   )),
                             ),
                           ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Not a member?',
+                                style: TextStyle(fontFamily: 'Poppins Regular'),
+                              ),
+                              GestureDetector(
+                                child: Text(
+                                  ' Register Now',
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins Bold',
+                                      color: CupertinoColors.activeBlue),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => register()),
+                                  );
+                                },
+                              )
+                            ],
+                          )
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Not a member?',
-                        style: TextStyle(fontFamily: 'Poppins Regular'),
-                      ),
-                      GestureDetector(
-                        child: Text(
-                          ' Register Now',
-                          style: TextStyle(
-                              fontFamily: 'Poppins Bold',
-                              color: CupertinoColors.activeBlue),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => register()),
-                          );
-                        },
-                      )
-                    ],
-                  )
                 ],
               ),
             ),
@@ -292,20 +301,27 @@ class _registerState extends State<register> {
         "name": username
       };
       final record = await pb.collection('users').create(body: body);
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text(
-        'Account created succesfully!',
-        style: TextStyle(fontFamily: 'Poppins Regular'),
-      )));
+
+      WidgetsBinding.instance.addPostFrameCallback((_) => CherryToast.success(
+            animationType: AnimationType.fromTop,
+            title: Text(
+              'Account created successfully!',
+              style: TextStyle(fontFamily: 'Poppins Regular'),
+            ),
+            toastPosition: Position.top,
+            actionHandler: () {},
+          ).show(context));
       Navigator.pop(context);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text(
-            'Account couldnot be created! Please try again.',
-            style: TextStyle(fontFamily: 'Poppins Regular'),
-          )));
-      print(e);
+      CherryToast.error(
+        animationType: AnimationType.fromTop,
+        title: Text(
+          'Account couldnot be created! Please try again.',
+          style: TextStyle(fontFamily: 'Poppins Regular'),
+        ),
+        toastPosition: Position.top,
+        actionHandler: () {},
+      ).show(context);
     }
   }
 
@@ -489,13 +505,15 @@ class _registerState extends State<register> {
                                     if (value.length > 7) {
                                       _signup();
                                     } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                              content: Text(
-                                        'Password must have minimum 8 characters!',
-                                        style: TextStyle(
-                                            fontFamily: 'Poppins Regular'),
-                                      )));
+                                      CherryToast.info(
+                                        title: Text(
+                                          'Password must have minimum 8 characters!',
+                                          style: TextStyle(
+                                              fontFamily: 'Poppins Regular'),
+                                        ),
+                                        toastPosition: Position.bottom,
+                                        actionHandler: () {},
+                                      ).show(context);
                                     }
                                   },
                                   child: Text(
@@ -506,33 +524,33 @@ class _registerState extends State<register> {
                                   )),
                             ),
                           ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Already a member?',
+                                style: TextStyle(fontFamily: 'Poppins Regular'),
+                              ),
+                              GestureDetector(
+                                child: Text(
+                                  ' Login',
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins Bold',
+                                      color: CupertinoColors.activeBlue),
+                                ),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                              )
+                            ],
+                          )
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Already a member?',
-                        style: TextStyle(fontFamily: 'Poppins Regular'),
-                      ),
-                      GestureDetector(
-                        child: Text(
-                          ' Login',
-                          style: TextStyle(
-                              fontFamily: 'Poppins Bold',
-                              color: Color(0xFF1E3F82)),
-                        ),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      )
-                    ],
-                  )
                 ],
               ),
             ),

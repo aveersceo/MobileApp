@@ -1,8 +1,13 @@
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:aveers_student_poc/components/login.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:aveers_student_poc/variables/globals.dart' as globals;
 import 'package:random_avatar/random_avatar.dart';
+import 'package:pocketbase/pocketbase.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class username_change extends StatefulWidget {
   const username_change({super.key});
@@ -13,31 +18,73 @@ class username_change extends StatefulWidget {
 
 class _username_changeState extends State<username_change> {
   TextEditingController _newusername = TextEditingController();
-  late final Client _client;
-  late final Account _account;
-  late final Databases _database;
-  late final Storage _storage;
 
-  void initState() {
-    super.initState();
-    _client = Client()
-      ..setEndpoint('http://43.204.171.125:80/v1')
-      ..setProject('6369298a96cc32391631');
-    _account = Account(_client);
+  Future<void> _signup() async {
+    try {
+      final pb = PocketBase('http://43.204.171.125');
+
+      String username = _newusername.text;
+
+      final body = <String, dynamic>{
+        "username": username,
+        "emailVisibility": true,
+        "name": username
+      };
+      final record = await pb.collection('users').create(body: body);
+      WidgetsBinding.instance.addPostFrameCallback((_) => CherryToast.success(
+            animationType: AnimationType.fromTop,
+            title: Text(
+              'Username updated!',
+              style: TextStyle(fontFamily: 'Poppins Regular'),
+            ),
+            toastPosition: Position.top,
+            actionHandler: () {},
+          ).show(context));
+      Navigator.pop(context);
+    } catch (e) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => CherryToast.error(
+            animationType: AnimationType.fromTop,
+            title: Text(
+              'Error!, Please Try again later.',
+              style: TextStyle(fontFamily: 'Poppins Regular'),
+            ),
+            toastPosition: Position.top,
+            actionHandler: () {},
+          ).show(context));
+      print(e);
+    }
   }
 
   Future<void> _usernamechange1() async {
     try {
-      await _account.updateName(name: _newusername.text);
+      final pb = PocketBase('http://43.204.171.125');
+      String username = _newusername.text;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String email = prefs.getString('email').toString();
+      String password = prefs.getString('pass').toString();
+      final authData = await pb.collection('users').authWithPassword(
+            email,
+            password,
+          );
+      final body = <String, dynamic>{
+        "username": username,
+        "emailVisibility": true,
+        "name": username
+      };
+      final record = await pb
+          .collection('users')
+          .update(pb.authStore.model.id, body: body);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          behavior: SnackBarBehavior.floating,
           content: Text(
-        'Username updated!',
-        style: TextStyle(fontFamily: 'Poppins Regular'),
-      )));
+            'Username updated!',
+            style: TextStyle(fontFamily: 'Poppins Regular'),
+          )));
       Navigator.pop(context);
       Navigator.pop(context);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          behavior: SnackBarBehavior.floating,
           backgroundColor: Colors.red,
           content: Text(
             'Error, Please try again later!',
@@ -107,7 +154,7 @@ class _username_changeState extends State<username_change> {
                       width: 600,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0xFF1E3F82),
+                              primary: CupertinoColors.activeBlue,
                               elevation: 0.0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),

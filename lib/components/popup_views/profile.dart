@@ -1,4 +1,9 @@
 import 'dart:convert';
+import 'package:aveers_student_poc/components/account_actions/acc_delete.dart';
+import 'package:aveers_student_poc/components/account_actions/update_education.dart';
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:aveers_student_poc/components/account_actions/password_change.dart';
 import 'package:aveers_student_poc/components/account_actions/username_change.dart';
@@ -30,7 +35,7 @@ class _profileState extends State<profile> {
   dynamic response;
   String pfp = globals.username;
 
-  Future<List<dynamic>> fetchUsers() async {
+  Future fetchUsers() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String email = prefs.getString('email').toString();
     String password = prefs.getString('pass').toString();
@@ -38,11 +43,13 @@ class _profileState extends State<profile> {
           email,
           password,
         );
-    final resultList = await pb.collection('users').getList(
+
+    /*final resultList = await pb.collection('users').getList(
           page: 1,
           perPage: 50,
         );
-    var jsonb = jsonDecode(resultList.toString())['items'];
+        */
+    var jsonb = jsonDecode(authData.toString())['record'];
 
     return jsonb;
   }
@@ -58,11 +65,16 @@ class _profileState extends State<profile> {
     prefs.remove('email');
     prefs.remove('pass');
     globals.isLoggedIn = false;
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text(
-      'Logged out!',
-      style: TextStyle(fontFamily: 'Poppins Regular'),
-    )));
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => CherryToast.warning(
+          animationType: AnimationType.fromTop,
+          title: Text(
+            'Logged out!',
+            style: TextStyle(fontFamily: 'Poppins Regular'),
+          ),
+          toastPosition: Position.top,
+          actionHandler: () {},
+        ).show(context));
     Navigator.pop(context);
   }
 
@@ -76,12 +88,18 @@ class _profileState extends State<profile> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             dynamic data = snapshot.data;
-            final username = data[0]['username'].toString();
+            /*final username = data[0]['username'].toString();
             final email = data[0]['email'].toString();
             final course = data[0]['course'].toString();
             final batch = data[0]['batch'].toString();
             final year = data[0]['year'].toString();
-            final college = data[0]['college'].toString();
+            final college = data[0]['college'].toString(); */
+            final username = data['username'].toString();
+            final email = data['email'].toString();
+            final course = data['course'].toString();
+            final batch = data['batch'].toString();
+            final year = data['year'].toString();
+            final college = data['college'].toString();
             final String rawSvg = Jdenticon.toSvg(username);
 
             return ShowUpAnimation(
@@ -192,7 +210,7 @@ class _profileState extends State<profile> {
                                                             course,
                                                             style: TextStyle(
                                                                 fontFamily:
-                                                                    'Poppins Bold'),
+                                                                    'Poppins Regular'),
                                                           )),
                                                     ],
                                                   ),
@@ -303,7 +321,7 @@ class _profileState extends State<profile> {
                                                             college,
                                                             style: TextStyle(
                                                                 fontFamily:
-                                                                    'Poppins Bold'),
+                                                                    'Poppins Regular'),
                                                           )),
                                                     ],
                                                   ),
@@ -382,7 +400,12 @@ class _profileState extends State<profile> {
                                 customBorder: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(10.0))),
-                                onTap: () {},
+                                onTap: () {
+                                  showBarModalBottomSheet(
+                                      expand: false,
+                                      context: context,
+                                      builder: (context) => update_education());
+                                },
                                 child: Padding(
                                   padding: const EdgeInsets.all(5.0),
                                   child: Row(
@@ -418,35 +441,6 @@ class _profileState extends State<profile> {
                                     children: [
                                       Text(
                                         'Change Username',
-                                        style: TextStyle(
-                                            fontFamily: 'Poppins Regular'),
-                                      ),
-                                      Spacer(),
-                                      Icon(
-                                        PhosphorIcons.caretCircleRightBold,
-                                        size: 20.0,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Divider(),
-                              InkWell(
-                                customBorder: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0))),
-                                onTap: () {
-                                  showBarModalBottomSheet(
-                                      expand: false,
-                                      context: context,
-                                      builder: (context) => email_change());
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        'Change Email',
                                         style: TextStyle(
                                             fontFamily: 'Poppins Regular'),
                                       ),
@@ -551,7 +545,12 @@ class _profileState extends State<profile> {
                                 customBorder: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(10.0))),
-                                onTap: () {},
+                                onTap: () {
+                                  showBarModalBottomSheet(
+                                      expand: false,
+                                      context: context,
+                                      builder: (context) => acc_delete());
+                                },
                                 child: Padding(
                                   padding: const EdgeInsets.all(5.0),
                                   child: Row(
@@ -590,7 +589,7 @@ class _profileState extends State<profile> {
               width: 25.0,
               child: CircularProgressIndicator(
                 strokeWidth: 2.0,
-                color: Color(0xFF1E3F82),
+                color: CupertinoColors.activeBlue,
               ),
             ),
           );

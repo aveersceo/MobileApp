@@ -1,5 +1,6 @@
 import 'package:aveers_student_poc/components/calender_page.dart';
 import 'package:aveers_student_poc/components/login.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:aveers_student_poc/components/popup_views/profile.dart';
@@ -57,10 +58,11 @@ class _home_pageState extends State<home_page> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String email = prefs.getString('email').toString();
     String password = prefs.getString('pass').toString();
-    final authData = await pb.collection('users').authWithPassword(
+    /*final authData = await pb.collection('users').authWithPassword(
           email,
           password,
         );
+        */
     final resultList = await pb.collection('exams_data').getList(
           page: 1,
           perPage: 50,
@@ -74,10 +76,11 @@ class _home_pageState extends State<home_page> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String email = prefs.getString('email').toString();
     String password = prefs.getString('pass').toString();
-    final authData = await pb.collection('users').authWithPassword(
+    /*final authData = await pb.collection('users').authWithPassword(
           email,
           password,
         );
+        */
     final resultList = await pb.collection('colleges').getList(
           page: 1,
           perPage: 50,
@@ -91,10 +94,11 @@ class _home_pageState extends State<home_page> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String email = prefs.getString('email').toString();
     String password = prefs.getString('pass').toString();
-    final authData = await pb.collection('users').authWithPassword(
+    /*final authData = await pb.collection('users').authWithPassword(
           email,
           password,
         );
+        */
     final resultList = await pb.collection('timetable_data').getList(
           page: 1,
           perPage: 50,
@@ -109,6 +113,10 @@ class _home_pageState extends State<home_page> {
     response = fetchUsers();
     response2 = fetchtimetable();
     response3 = fetchCourses();
+  }
+
+  Color getColor(Set<MaterialState> states) {
+    return Colors.grey;
   }
 
   @override
@@ -129,7 +137,7 @@ class _home_pageState extends State<home_page> {
                       direction: Direction.vertical,
                       offset: 0.5,
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(5.0, 0, 5.0, 5.0),
+                        padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
                         child: SingleChildScrollView(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,87 +169,137 @@ class _home_pageState extends State<home_page> {
                                       */
                                 ],
                               ),
-                              Container(
-                                height: 150,
-                                child: Card(
-                                  elevation: 0.5,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0))),
-                                  child: Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: FutureBuilder(
-                                          future: response2,
-                                          builder: (BuildContext context,
-                                              AsyncSnapshot snapshot) {
-                                            return ListView.builder(
-                                                physics:
-                                                    BouncingScrollPhysics(),
-                                                //scrollDirection: Axis.horizontal,
-                                                shrinkWrap: true,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  return Table(
-                                                    children: [
-                                                      TableRow(children: [
-                                                        Text(
-                                                          snapshot.data[index]
-                                                              ['day'],
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Poppins Bold'),
-                                                        ),
-                                                        Text(
-                                                          snapshot.data[index]
-                                                              ['sub1'],
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Poppins Regular'),
-                                                        ),
-                                                        Text(
-                                                          snapshot.data[index]
-                                                              ['sub2'],
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Poppins Regular'),
-                                                        ),
-                                                        Text(
-                                                          snapshot.data[index]
-                                                              ['sub3'],
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Poppins Regular'),
-                                                        ),
-                                                        Text(
-                                                          snapshot.data[index]
-                                                              ['sub4'],
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Poppins Regular'),
-                                                        ),
-                                                        Text(
-                                                          snapshot.data[index]
-                                                              ['sub5'],
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Poppins Regular'),
-                                                        ),
-                                                        Text(
-                                                          snapshot.data[index]
-                                                              ['sub6'],
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Poppins Regular'),
-                                                        ),
-                                                      ])
-                                                    ],
-                                                  );
-                                                },
-                                                itemCount:
-                                                    snapshot.data.length);
-                                          })),
-                                ),
+                              Card(
+                                elevation: 0.5,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0))),
+                                child: Padding(
+                                    padding:
+                                        EdgeInsets.fromLTRB(2.0, 5.0, 2.0, 5.0),
+                                    child: FutureBuilder(
+                                        future: response2,
+                                        builder: (BuildContext context,
+                                            AsyncSnapshot snapshot) {
+                                          return ListView.builder(
+                                              padding: EdgeInsets.zero,
+                                              physics: BouncingScrollPhysics(),
+                                              //scrollDirection: Axis.horizontal,
+                                              shrinkWrap: true,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return Table(
+                                                  border: TableBorder(
+                                                      horizontalInside:
+                                                          BorderSide(
+                                                              width: 1.0,
+                                                              color:
+                                                                  Colors.grey),
+                                                      verticalInside:
+                                                          BorderSide(
+                                                              width: 1.0,
+                                                              color:
+                                                                  Colors.grey)),
+                                                  children: [
+                                                    TableRow(
+                                                        decoration: BoxDecoration(
+                                                            color: (index % 2 ==
+                                                                    0)
+                                                                ? Colors.white
+                                                                : Colors
+                                                                    .black12),
+                                                        children: [
+                                                          Align(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                              snapshot.data[
+                                                                  index]['day'],
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    'Poppins Bold',
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Align(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                              snapshot.data[
+                                                                      index]
+                                                                  ['sub1'],
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Poppins Regular'),
+                                                            ),
+                                                          ),
+                                                          Align(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                              snapshot.data[
+                                                                      index]
+                                                                  ['sub2'],
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Poppins Regular'),
+                                                            ),
+                                                          ),
+                                                          Align(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                              snapshot.data[
+                                                                      index]
+                                                                  ['sub3'],
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Poppins Regular'),
+                                                            ),
+                                                          ),
+                                                          Align(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                              snapshot.data[
+                                                                      index]
+                                                                  ['sub4'],
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Poppins Regular'),
+                                                            ),
+                                                          ),
+                                                          Align(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                              snapshot.data[
+                                                                      index]
+                                                                  ['sub5'],
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Poppins Regular'),
+                                                            ),
+                                                          ),
+                                                          Align(
+                                                            alignment: Alignment
+                                                                .center,
+                                                            child: Text(
+                                                              snapshot.data[
+                                                                      index]
+                                                                  ['sub6'],
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'Poppins Regular'),
+                                                            ),
+                                                          ),
+                                                        ])
+                                                  ],
+                                                );
+                                              },
+                                              itemCount: snapshot.data.length);
+                                        })),
                               ),
                               Row(
                                 children: [
@@ -265,53 +323,46 @@ class _home_pageState extends State<home_page> {
                                       */
                                 ],
                               ),
-                              SizedBox(
-                                width: double.infinity,
-                                height: 190.0,
-                                child: Card(
-                                  elevation: 0.5,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0))),
-                                  child: Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: ListView.separated(
-                                          physics: BouncingScrollPhysics(),
-                                          shrinkWrap: true,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            return Row(
-                                              children: [
-                                                Text(
-                                                  snapshot.data[index]['date'],
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                          'Poppins Bold'),
-                                                ),
-                                                SizedBox(width: 10.0),
-                                                Text(
-                                                  snapshot.data[index]
-                                                      ['subject'],
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                          'Poppins Regular'),
-                                                ),
-                                                Spacer(),
-                                                Text(
-                                                  snapshot.data[index]['time'],
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                          'Poppins Bold'),
-                                                )
-                                              ],
-                                            );
-                                          },
-                                          separatorBuilder:
-                                              (BuildContext context,
-                                                      int index) =>
-                                                  Divider(),
-                                          itemCount: snapshot.data.length)),
-                                ),
+                              Card(
+                                elevation: 0.5,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0))),
+                                child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: ListView.separated(
+                                        padding: EdgeInsets.zero,
+                                        physics: BouncingScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return Row(
+                                            children: [
+                                              Text(
+                                                snapshot.data[index]['date'],
+                                                style: TextStyle(
+                                                    fontFamily: 'Poppins Bold'),
+                                              ),
+                                              SizedBox(width: 10.0),
+                                              Text(
+                                                snapshot.data[index]['subject'],
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        'Poppins Regular'),
+                                              ),
+                                              Spacer(),
+                                              Text(
+                                                snapshot.data[index]['time'],
+                                                style: TextStyle(
+                                                    fontFamily: 'Poppins Bold'),
+                                              )
+                                            ],
+                                          );
+                                        },
+                                        separatorBuilder:
+                                            (BuildContext context, int index) =>
+                                                Divider(),
+                                        itemCount: snapshot.data.length)),
                               ),
                               Text(
                                 'Courses',
@@ -466,7 +517,7 @@ class _home_pageState extends State<home_page> {
                         width: 25.0,
                         child: CircularProgressIndicator(
                           strokeWidth: 2.0,
-                          color: Color(0xFF1E3F82),
+                          color: CupertinoColors.activeBlue,
                         ),
                       ),
                     );

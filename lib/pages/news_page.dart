@@ -157,7 +157,7 @@ class _news_pageState extends State<news_page> {
                             width: 25.0,
                             child: CircularProgressIndicator(
                               strokeWidth: 2.0,
-                              color: Color(0xFF1E3F82),
+                              color: CupertinoColors.activeBlue,
                             ),
                           ),
                         );

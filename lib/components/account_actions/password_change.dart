@@ -1,8 +1,13 @@
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:aveers_student_poc/components/login.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:aveers_student_poc/variables/globals.dart' as globals;
+import 'package:pocketbase/pocketbase.dart';
 import 'package:random_avatar/random_avatar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class password_change extends StatefulWidget {
   const password_change({super.key});
@@ -14,37 +19,51 @@ class password_change extends StatefulWidget {
 class _password_changeState extends State<password_change> {
   TextEditingController _oldpassword = TextEditingController();
   TextEditingController _newpassword = TextEditingController();
-  late final Client _client;
-  late final Account _account;
-  late final Databases _database;
-  late final Storage _storage;
-
-  void initState() {
-    super.initState();
-    _client = Client()
-      ..setEndpoint('http://43.204.171.125:80/v1')
-      ..setProject('6369298a96cc32391631');
-    _account = Account(_client);
-  }
 
   Future<void> _passwordchange1() async {
     try {
-      await _account.updatePassword(
-          password: _newpassword.text, oldPassword: _oldpassword.text);
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text(
-        'Password updated!',
-        style: TextStyle(fontFamily: 'Poppins Regular'),
-      )));
+      final pb = PocketBase('http://43.204.171.125');
+      String oldpass = _oldpassword.text;
+      String newpass = _newpassword.text;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String email = prefs.getString('email').toString();
+      String password = prefs.getString('pass').toString();
+      final authData = await pb.collection('users').authWithPassword(
+            email,
+            password,
+          );
+
+      final body = <String, dynamic>{
+        "password": newpass,
+        "passwordConfirm": newpass,
+        "oldPassword": oldpass,
+      };
+      final record = await pb
+          .collection('users')
+          .update(pb.authStore.model.id, body: body);
+
+      WidgetsBinding.instance.addPostFrameCallback((_) => CherryToast.success(
+            animationType: AnimationType.fromTop,
+            title: Text(
+              'Password updated!',
+              style: TextStyle(fontFamily: 'Poppins Regular'),
+            ),
+            toastPosition: Position.top,
+            actionHandler: () {},
+          ).show(context));
+      globals.isLoggedIn = false;
       Navigator.pop(context);
       Navigator.pop(context);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text(
-            'Error, Please try again later!',
-            style: TextStyle(fontFamily: 'Poppins Regular'),
-          )));
+      WidgetsBinding.instance.addPostFrameCallback((_) => CherryToast.error(
+            animationType: AnimationType.fromTop,
+            title: Text(
+              'Error!, Please Try again later.',
+              style: TextStyle(fontFamily: 'Poppins Regular'),
+            ),
+            toastPosition: Position.top,
+            actionHandler: () {},
+          ).show(context));
       Navigator.pop(context);
     }
   }
@@ -141,7 +160,7 @@ class _password_changeState extends State<password_change> {
                       width: 600,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0xFF1E3F82),
+                              primary: CupertinoColors.activeBlue,
                               elevation: 0.0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),

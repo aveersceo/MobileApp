@@ -1,3 +1,5 @@
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:aveers_student_poc/variables/globals.dart' as globals;
 import 'package:aveers_student_poc/components/login.dart';
@@ -130,11 +132,16 @@ class _profile_popupState extends State<profile_popup> {
                 onTap: () {
                   _logout();
                   globals.isLoggedIn = false;
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text(
-                    'Logged out!',
-                    style: TextStyle(fontFamily: 'Poppins Regular'),
-                  )));
+                  WidgetsBinding.instance
+                      .addPostFrameCallback((_) => CherryToast.warning(
+                            title: Text(
+                              'Logged out!',
+                              style: TextStyle(fontFamily: 'Poppins Regular'),
+                            ),
+                            toastPosition: Position.bottom,
+                            actionHandler: () {},
+                          ).show(context));
+
                   Navigator.pop(context);
                 },
                 child: Padding(
